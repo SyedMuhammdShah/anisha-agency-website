@@ -3,6 +3,10 @@
 import { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
+import StressFreeSection from "../components/StressFreeSection";
+import BottleShowcase from "../components/BottleShowcase";
+import TestimonialsSection from "../components/TestimonialsSection";
+import WorkWithUsSection from "../components/WorkWithUsSection";
 import Services from "../components/Services";
 import Portfolio from "../components/Portfolio";
 import BottleConfigurator from "../components/BottleConfigurator";
@@ -21,7 +25,7 @@ export default function Home() {
     }
     const element = document.getElementById(sectionId);
     if (element) {
-      const yOffset = -80; // height of sticky header
+      const yOffset = -80;
       const y = element.getBoundingClientRect().top + window.scrollY + yOffset;
       window.scrollTo({ top: y, behavior: "smooth" });
       setActiveSection(sectionId);
@@ -30,15 +34,14 @@ export default function Home() {
 
   const handleInquireCustom = (configDetails: string) => {
     setCustomMsg(configDetails);
+    handleNavClick("contact");
   };
 
-  // Scroll detection to highlight active navigation link
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ["services", "portfolio", "creator", "contact"];
-      const scrollPosition = window.scrollY + 120; // offset buffer
+      const sections = ["hero", "about", "services", "portfolio", "creator", "contact"];
+      const scrollPosition = window.scrollY + 120;
 
-      // If scrolled to top, set to hero
       if (window.scrollY < 100) {
         setActiveSection("hero");
         return;
@@ -62,16 +65,25 @@ export default function Home() {
   }, []);
 
   return (
-    <>
+    <div className="min-h-screen flex flex-col bg-white text-[#2d2d2d] antialiased">
       <Navbar onNavClick={handleNavClick} activeSection={activeSection} />
       <main className="flex-grow">
-        <Hero onCTAQuery={handleNavClick} />
+        <div id="hero">
+          <Hero onCTAQuery={handleNavClick} />
+        </div>
+        <div id="about">
+          <StressFreeSection />
+        </div>
+        <BottleShowcase onLearnMore={() => handleNavClick("portfolio")} />
+        <TestimonialsSection onCTA={() => handleNavClick("contact")} />
+        <WorkWithUsSection onCTA={() => handleNavClick("contact")} />
         <Services />
         <Portfolio />
         <BottleConfigurator onInquireCustom={handleInquireCustom} />
         <Contact customMessage={customMsg} />
       </main>
       <Footer onNavClick={handleNavClick} />
-    </>
+    </div>
   );
 }
+

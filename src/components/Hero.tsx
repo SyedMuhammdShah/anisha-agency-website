@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { ArrowRight, Sparkles } from "lucide-react";
 
 interface HeroProps {
   onCTAQuery: (sectionId: string) => void;
@@ -10,128 +9,79 @@ interface HeroProps {
 
 export default function Hero({ onCTAQuery }: HeroProps) {
   return (
-    <section className="relative min-h-screen flex items-center justify-center pt-24 pb-16 overflow-hidden">
-      {/* Background Ambient Glow */}
-      <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-gold-dark/5 blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-1/3 right-1/4 translate-x-1/2 translate-y-1/2 w-[600px] h-[600px] rounded-full bg-purple-900/10 blur-[150px] pointer-events-none" />
+    <section className="relative min-h-[650px] lg:min-h-[750px] flex items-center text-white pt-28 pb-20 md:py-36 overflow-hidden clip-hero-bottom bg-[#522578]">
+      
+      {/* Background Image: Power-of-love render covering the entire hero section */}
+      <div className="absolute inset-0 w-full h-full z-0 select-none">
+        <Image
+          src="/images/power-of-love.webp"
+          alt="Anisha Agency Power of Love Hero Background"
+          fill
+          priority
+          className="object-cover object-right md:object-center"
+          sizes="100vw"
+        />
+        {/* Soft subtle gradient overlay to ensure text contrast on mobile if needed */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#4b1f70]/80 via-[#4b1f70]/40 to-transparent md:hidden pointer-events-none" />
+      </div>
 
-      <div className="max-w-7xl mx-auto px-6 md:px-12 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center relative z-10">
+      {/* Content Container */}
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 w-full grid grid-cols-1 lg:grid-cols-12 items-center relative z-10">
         
-        {/* Left: Copy Content */}
-        <div className="lg:col-span-7 flex flex-col items-start text-left">
+        {/* Left: Headline & Text Content */}
+        <div className="lg:col-span-7 xl:col-span-6 flex flex-col items-start text-left">
           
-          {/* Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-panel border border-gold-dark/20 text-gold-light text-xs font-light tracking-[0.15em] mb-8"
-          >
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>DUBAI&apos;S PREMIER PERFUMERY DESIGN AGENCY</span>
-          </motion.div>
-
-          {/* Headline */}
+          {/* Main Headline */}
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.15 }}
-            className="text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-serif font-light tracking-wide leading-[1.1] mb-6"
+            transition={{ duration: 0.7 }}
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-sans font-light tracking-wide leading-[1.2] mb-6 text-white uppercase"
           >
-            We Sculpt <br />
-            <span className="font-serif italic font-normal gold-gradient-text">Liquid Luxury</span>
+            WE MAKE PERFUME <br className="hidden sm:inline" /> DESIGN EASY!
           </motion.h1>
 
-          {/* Description */}
+          {/* Subtext Paragraph 1 */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="text-foreground/75 text-base md:text-lg max-w-xl font-light tracking-wide leading-relaxed mb-10"
+            transition={{ duration: 0.7, delay: 0.15 }}
+            className="text-white/90 text-sm sm:text-base font-sans font-light leading-relaxed mb-4 max-w-lg drop-shadow-xs"
           >
-            Anisha Agency crafts bespoke perfume bottles, Zamac caps, and complete fragrance branding packages. Over 25 years of turning sensory visions into shelf-ready masterpieces.
+            From concept to shelf, we provide custom perfume packaging design in Dubai, fragrance development, and complete supply chain support.
           </motion.p>
 
-          {/* Call To Actions */}
+          {/* Subtext Paragraph 2 */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.25 }}
+            className="text-white/85 text-sm sm:text-base font-sans font-light leading-relaxed mb-8 max-w-lg drop-shadow-xs"
+          >
+            We help perfume brands create packaging that stands out and succeeds in the market.
+          </motion.p>
+
+          {/* CTA Button */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.45 }}
-            className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto"
+            transition={{ duration: 0.7, delay: 0.35 }}
           >
             <button
-              onClick={() => onCTAQuery("creator")}
-              className="px-8 py-4 rounded-full gold-gradient-bg text-dark-bg text-sm tracking-widest font-medium hover:brightness-110 shadow-lg shadow-gold-dark/20 transition-all flex items-center justify-center gap-2 cursor-pointer group"
+              onClick={() => onCTAQuery("contact")}
+              className="px-6 sm:px-8 py-3.5 sm:py-4 bg-[#33144d] hover:bg-[#250d3a] border border-purple-300/30 text-white text-xs sm:text-sm font-sans font-medium tracking-[0.18em] rounded-md shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 cursor-pointer uppercase"
             >
-              <span>DESIGN BOTTLE</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              BOOK A FREE DISCOVERY MEETING
             </button>
-            <button
-              onClick={() => onCTAQuery("portfolio")}
-              className="px-8 py-4 rounded-full glass-panel hover:bg-gold-light/5 text-foreground text-sm tracking-widest font-light transition-all flex items-center justify-center gap-2 cursor-pointer"
-            >
-              EXPLORE CREATIONS
-            </button>
-          </motion.div>
-
-          {/* Quick stats banner */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1.2, delay: 0.6 }}
-            className="grid grid-cols-3 gap-6 sm:gap-10 border-t border-dark-border mt-16 pt-8 w-full max-w-lg"
-          >
-            <div>
-              <p className="text-2xl sm:text-3xl font-serif gold-gradient-text">25+</p>
-              <p className="text-xxs sm:text-xs tracking-widest font-light text-foreground/50 mt-1 uppercase">Years Industry Experience</p>
-            </div>
-            <div>
-              <p className="text-2xl sm:text-3xl font-serif gold-gradient-text">100+</p>
-              <p className="text-xxs sm:text-xs tracking-widest font-light text-foreground/50 mt-1 uppercase">Bespoke Fragrances</p>
-            </div>
-            <div>
-              <p className="text-2xl sm:text-3xl font-serif gold-gradient-text">100%</p>
-              <p className="text-xxs sm:text-xs tracking-widest font-light text-foreground/50 mt-1 uppercase">Turnkey Execution</p>
-            </div>
           </motion.div>
         </div>
 
-        {/* Right: Premium Showcase Bottle Render */}
-        <div className="lg:col-span-5 flex justify-center relative select-none">
-          {/* Subtle spinning soft gold ring in background */}
-          <motion.div
-            animate={{ rotate: 360 }}
-            transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-            className="absolute inset-0 m-auto w-[280px] sm:w-[380px] h-[280px] sm:h-[380px] border border-gold-light/5 rounded-full pointer-events-none"
-          />
-          
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9, rotate: -2 }}
-            animate={{ opacity: 1, scale: 1, rotate: 0 }}
-            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-            className="relative w-[300px] h-[400px] sm:w-[360px] sm:h-[480px] drop-shadow-[0_15px_50px_rgba(226,194,117,0.12)]"
-          >
-            {/* Ambient gold glow immediately behind the bottle */}
-            <div className="absolute inset-0 bg-gradient-to-t from-gold-dark/10 via-transparent to-transparent rounded-3xl filter blur-xl opacity-60" />
-            
-            {/* Main Visual Image */}
-            <motion.div
-              animate={{ y: [0, -12, 0] }}
-              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-              className="w-full h-full relative"
-            >
-              <Image
-                src="/images/perfume_bottle_hero.png"
-                alt="Anisha Luxury Perfume Concept"
-                fill
-                priority
-                className="object-contain"
-                sizes="(max-width: 768px) 300px, 360px"
-              />
-            </motion.div>
-          </motion.div>
-        </div>
+        {/* Right column kept empty to let the background image's bottle render show seamlessly */}
+        <div className="hidden lg:block lg:col-span-5 xl:col-span-6" />
+
       </div>
     </section>
   );
 }
+
+
